@@ -1,0 +1,108 @@
+<% provide(:class, 'category-page  option6') %>
+
+<% provide(:seo_title, @post_category.meta_title) %>
+<% provide(:seo_description, @post_category.meta_description) %>
+<% provide(:seo_keywords, @post_category.meta_keywords) %>
+
+<div class="columns-container">
+    <div class="container" id="columns">
+        <div class="row">
+            <!-- Left colunm -->
+            <div class="column col-xs-12 col-sm-3" id="left_column">
+                <!-- Blog category -->
+                <div class="block left-module">
+                    <p class="title_block">Все категории</p>
+                    <div class="block_content">
+                        <!-- layered -->
+                        <div class="layered layered-category">
+                            <div class="layered-content">
+                                <ul class="tree-menu">
+                                  <% @post_categories.each do |category| %>
+                                    <li><span></span><%= link_to category.name, post_category_path(category) %></li>
+                                  <% end %>  
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ./layered -->
+                    </div>
+                </div>
+
+                <div class="block left-module">
+                    <p class="title_block">Случайные записи</p>
+                    <div class="block_content">
+                        <!-- layered -->
+                        <div class="layered">
+                            <div class="layered-content">
+                                <ul class="blog-list-sidebar clearfix">
+                                <% @random_posts.each do |post| %>
+                                    <li>
+                                        <div class="post-thumb">
+                                            <a href="#"><img src="<%= post.avatar.page_category_related_items %>"></a>
+                                        </div>
+                                        <div class="post-info">
+                                            <h5 class="entry_title"><%= link_to post.name, post_path(post) %></h5>
+                                            <div class="post-meta">
+                                                <span class="date"><i class="fa fa-calendar"></i> <%= post.created_at.to_date %></span>    
+                                            </div>
+                                        </div>
+                                    </li>
+                                <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+     
+            </div>
+           
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                <h2 class="page-heading">
+                    <span class="page-heading-title2"><%= @post_category.name %></span>
+                </h2>
+                <div class="sortPagiBar clearfix">
+                  <%= @post_category.description.html_safe %>
+                </div>
+                <ul class="blog-posts">
+                 <% @posts.each do |post| %>
+                    <li class="post-item">
+                        <article class="entry">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="entry-thumb image-hover2">
+                                        <a href="<%= post_path(post)  %>">
+                                            <img src="<%= post.avatar.page_category %>" >
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="entry-ci">
+                                        <h3 class="entry-title"><%= link_to post.name, post_path(post) %></h3>
+                                        <div class="entry-meta-data">
+                                     
+                                                                                   <span class="date"><i class="fa fa-calendar"></i> <%= post.created_at.to_date %></span>
+                                        </div>
+                                        
+                                        <div class="entry-excerpt">
+                                            <%= post.lead.html_safe %>
+                                        </div>
+                                        <div class="entry-more">
+                                            <%= link_to "Подробнее", post_path(post) %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                   <% end %>
+                </ul>
+                <div class="sortPagiBar clearfix">
+                    <div class="bottom-pagination">
+                        <nav>
+                         <%= will_paginate @posts %>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

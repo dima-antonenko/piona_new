@@ -1,0 +1,119 @@
+<% provide(:class, 'category-page') %>
+
+<% provide(:seo_title, @product_category.meta_title) %>
+<% provide(:seo_description, @product_category.meta_description) %>
+<% provide(:seo_keywords, @product_category.meta_keywords) %>
+
+<div class="columns-container">
+    <div class="container" id="columns">
+     
+        <div class="row">
+            <!-- Left colunm -->
+            <div class="column col-xs-12 col-sm-3" id="left_column">
+                <!-- block category -->
+                <div class="block left-module">
+                    <p class="title_block">Все категории</p>
+                    <div class="block_content">
+                        <!-- layered -->
+                        <div class="layered layered-category">
+                            <div class="layered-content">
+                                <ul class="tree-menu">
+                                   <% @parent_product_categories.each do |category| %>
+                                     <li><span></span><%= link_to category.name, product_category_path(category) %></li>
+                                   <% end %>  
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ./layered -->
+                    </div>
+                </div>
+                <div class="col-left-slide left-module">
+             
+                      <a href="<%= @banner.link %>"><img src="<%= @banner.image.site_normal %>" alt="slide-left"></a>
+                      
+                    </ul>
+
+                </div>
+            </div>
+            <!-- ./left colunm -->
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+            
+                <!-- category-slider -->
+                <div class="category-slider">
+                <img src="<%= @product_category.large_avatar.page_category %>" >
+                </div>
+                <!-- ./category-slider -->
+                <!-- subcategories -->
+
+                 <div class="cat-short-desc">
+                    <div class="desc-text text-left">
+                        <%= @product_category.description.html_safe %>
+                    </div>
+                    <div class="cat-short-desc-products">
+                        <ul class="row">
+                            <% @subcategories.each do |category| %>
+                            <li class="col-sm-3">
+                                <div class="product-container">
+                                    <div class="product-thumb">
+                                    <a href="#"><img src="<%= category.avatar.page_category_subcategories_list %>" alt="Product"></a>
+                                    </div>
+                                    <h5 class="product-name">
+                                        <%= link_to category.name, product_category_path(category) %>
+                                    </h5>
+                                </div>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+
+              
+                <!-- ./subcategories -->
+                <!-- view-product-list-->
+                <div id="view-product-list" class="view-product-list">
+                    <h2 class="page-heading">
+                        <span class="page-heading-title"><%= @product_category.name %></span>
+                    </h2>
+                        
+                    <ul class="row product-list grid">
+                      <% @products.each do |product| %>
+                        <li class="col-sx-12 col-sm-4">
+                            <div class="product-container">
+                                <div class="left-block">
+                                    <a href="#">
+                                        <img class="img-responsive" alt="product" src="<%= product.avatar.page_category %>" />
+                                    </a>
+                                   
+                                    <div class="add-to-cart">
+                                        <%= link_to "Подробнее", product_path(product) %>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <h5 class="product-name"><%= link_to product.name, product_path(product) %></h5>
+                                    <div class="content_price">
+                                        <span class="price product-price"><%= product.price %> р.</span>
+                                    </div>
+
+                            </div>
+                        </li>
+
+                        <% end %>
+                    </ul>
+                </div>
+
+                <div class="sortPagiBar">
+                    <div class="bottom-pagination">
+                        <nav>
+                          <%= will_paginate @products %>
+                        </nav>
+                    </div>
+
+
+                </div>
+            </div>
+       
+        </div>
+     
+    </div>
+</div>

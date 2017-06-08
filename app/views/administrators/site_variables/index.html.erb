@@ -1,0 +1,32 @@
+<div id="page_content_inner">
+    <h3 class="heading_b uk-margin-bottom">Блоки</h3>
+    <div class="md-card">
+        <div class="md-card-content">
+            <div class="uk-overflow-container uk-margin-bottom">
+                <table class="uk-table uk-table-nowrap uk-table-hover" id="ts_pager_filter">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th class="uk-text-center" >Содержимое</th>
+                            <th class="uk-text-center" >Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @site_variables.each do |variable| %>
+                        <tr>
+                            <td><%= variable.title %></td>
+                            <td class="uk-text-center" ><%= variable.content %></td>
+                            
+                            <td class="uk-text-center" >
+                            <%= link_to "<i class=\"material-icons md-24\">&#xE254;</i>".html_safe, edit_administrators_site_variable_path(variable) %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

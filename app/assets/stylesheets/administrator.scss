@@ -1,0 +1,11 @@
+//= require_directory ./administrator/theme
+
+.will_paginate_plugin{
+  margin: 0px auto;
+  position: relative;
+  padding: 20px 0 10px 0;
+}
+
+.custom_page_heading{
+  min-height: 40px !important; 
+}

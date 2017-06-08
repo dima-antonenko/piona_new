@@ -1,0 +1,30 @@
+
+<div class="login_page_wrapper">
+        <div class="md-card" id="login_card">
+            <div class="md-card-content large-padding" id="login_form">
+                
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                    <div class="uk-form-row">
+                        <label for="login_username">Email</label>
+                        <%= f.email_field :email, autofocus: true, class: "md-input" %>
+                    </div>
+                    <div class="uk-form-row">
+                        <label for="login_password">Пароль (минимум символов: <%= @minimum_password_length %>)</label>
+                       <%= f.text_field :password, class: "md-input" %>
+                    </div>
+                    <div class="uk-form-row">
+                        <label for="login_password">Повторить пароль</label>
+                       <%= f.text_field :password_confirmation, class: "md-input" %>
+                    </div>
+                    <div class="uk-margin-medium-top">
+                    <%= f.submit "Регистрация", class: "md-btn md-btn-primary md-btn-block md-btn-large" %>
+                    </div>
+
+                <% end %>
+            </div>
+
+        </div>
+        <div class="uk-margin-top uk-text-center">
+            <a href="/administrators/sign_in">У меня уже есть аккаунт</a>
+        </div>
+    </div>

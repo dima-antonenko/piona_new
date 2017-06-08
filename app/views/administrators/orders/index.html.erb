@@ -1,0 +1,58 @@
+<div id="page_content_inner">
+<h3 class="heading_b uk-margin-bottom">Заказы</h3>
+<% if @orders.size == 0 %>
+    <div class="md-card">
+        <div class="md-card-content">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                <center> Отсутствуют элементы для отображения </center></div>
+            </div>
+        </div>
+    </div>
+    <% else %>
+    <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+        <div class="uk-width-xLarge-10-10  uk-width-large-10-10">
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container uk-margin-bottom">
+                        <table class="uk-table uk-table-nowrap uk-table-hover" id="ts_pager_filter">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th class="uk-text-center">Имя покупателя</th>
+                                    <th class="uk-text-center">Телефон</th>
+                                    <th class="uk-text-center">Общая стоимость</th>
+                                    <th class="uk-text-center">Дата создания</th>
+                                    <th class="uk-text-center">Удалить</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @orders.each do |order| %>
+                                <tr class="item<%= order.id %>">
+                                    <td><%= order.id %></td>
+                                    <td class="uk-text-center">
+                                    <%= link_to order.customer_name, administrators_order_path(order) if order.customer_name != "" %>
+                                    <%= link_to "Заказ в один клик", administrators_order_path(order) if order.customer_name == "" %>    
+                                    </td>
+                                    <td class="uk-text-center"><%= order.customer_phone %></td>
+                                    <td class="uk-text-center"><%= order.total_price %> р.</td>
+                                    <td class="uk-text-center"><%= order.created_at %></td>
+                                    <td class="uk-text-center">
+                                        <%= link_to "<i class=\"material-icons md-24\">&#xE88F;</i>".html_safe, administrators_order_path(order) %>
+                                        <%= link_to "<i class=\"material-icons md-24\">&#xE872;</i>".html_safe, administrators_order_path(order), method: :delete, remote: true,  data: { confirm: "удалить запись ?"} %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="will_paginate_plugin uk-text-center">
+                        <%= will_paginate @back_calls %>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  <% end %>  
+</div>

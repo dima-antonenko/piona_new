@@ -1,0 +1,103 @@
+<div id="page_content_inner">
+<h3 class="heading_b uk-margin-bottom">Товары</h3>
+<% if @products.size == 0 %>
+    <div class="md-card">
+        <div class="md-card-content">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                <center> Отсутствуют элементы для отображения </center></div>
+            </div>
+        </div>
+    </div>
+    <% else %>
+
+    <%= form_tag({controller: "products", action: "checked"}, method: "post", class: "uk-form-stacked", id: "product_edit_form", :multipart => true) do %>
+    <div class="md-card uk-margin-medium-bottom">
+        <div class="md-card-content">
+            <div class="uk-overflow-container">
+                <table class="uk-table uk-table-nowrap uk-table-hover table_check">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"  data-md-icheck class="check_all"></th>
+                            <th>Артикул</th>
+                            <th>Название</th>
+                            <th>Категория</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Наличие</th>
+                            <th>Создан</th>
+                            <th>Обновлен</th>
+                            <th class="uk-text-center">Публикация</th>
+                            <th class="filter-false remove sorter-false uk-text-center">Действия</th>
+                        </tr>
+                    </thead>
+                       <tbody>
+                        <% @products.each do |product| %>
+                        <tr class="item<%= product.id %>">
+                            <td> <!-- <input type="checkbox" data-md-icheck class="ts_checkbox"> -->
+                            <%= check_box_tag "checked_products[]", product.id, false,{ class: "check_row", "data-md-icheck" => true}  %>
+                        </td>
+                        <td><%= product.id %></td>
+                        <td><%= link_to product.name, edit_administrators_product_path(product) %></td>
+                        <td>
+                            <%= get_product_category_name(product) %>
+                        </td>
+                        <td><%= product.price %> р.</td>
+                        <td><%= product.qty %> </td>
+                        <td><%= check_mark(product.stock) %></td>
+                        <td><%= product.created_at.to_date %></td>
+                        <td><%= product.updated_at.to_date %></td>
+                        <td class="uk-text-center"><%= check_mark(product.active) %></td>
+                        <td class="uk-text-center">
+                            <%= link_to "<i class=\"material-icons md-24\">&#xE254;</i>".html_safe, edit_administrators_product_path(product)%>
+                            <%= link_to "<i class=\"material-icons md-24\">&#xE872;</i>".html_safe, administrators_product_path(product), method: :delete, remote: true, data: { confirm: "удалить товар ?" } %>
+                            <%= link_to "<i class=\"material-icons md-24\">&#xE88F;</i>".html_safe, product_path(product),  target: "_blank" %>
+                           
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+                </table>
+            </div>
+            <div class="will_paginate_plugin uk-text-center">
+                <%= will_paginate @products %>
+             </div>   
+            <!--  
+            <ul class="uk-pagination uk-margin-medium-top">
+                <li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+                <li class="uk-active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><span>&hellip;</span></li>
+                <li><a href="#">10</a></li>
+                <li><a href="#"><i class="uk-icon-angle-double-right"></i></a></li>
+            </ul>
+            -->
+        </div>
+    </div>
+    <div class="md-card">
+        <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+            Действия с выделенными
+            </h3>
+        </div>
+        
+        <div class="md-card-content large-padding">
+            <div class="uk-grid uk-grid-divider uk-grid-medium" data-uk-grid-margin>
+                <div class="uk-width-large-4-10">
+                    <%= select_tag :checked_action, options_for_select(@actions), {include_blank: 'Не выбрано', "data-md-selectize ": true}%>
+                </div>
+                <div class="uk-width-large-6-10">
+                    <input type="submit" class="md-btn md-btn-warning" value="Подтвердить" />
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="md-fab-wrapper">
+    <a class="md-btn md-btn-success" href="/administrators/products/new/">Добавить товар</a>
+</div>
+<% end %>
+<% end %>
+</div>

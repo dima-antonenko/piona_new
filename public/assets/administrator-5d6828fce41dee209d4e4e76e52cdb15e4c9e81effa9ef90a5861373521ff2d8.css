@@ -1,0 +1,11 @@
+/* line 2, /home/dima/Rails/laston_cms/app/assets/stylesheets/administrator.scss */
+.will_paginate_plugin {
+  margin: 0px auto;
+  position: relative;
+  padding: 20px 0 10px 0;
+}
+
+/* line 8, /home/dima/Rails/laston_cms/app/assets/stylesheets/administrator.scss */
+.custom_page_heading {
+  min-height: 40px !important;
+}

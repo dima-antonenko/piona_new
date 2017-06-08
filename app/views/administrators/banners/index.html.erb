@@ -1,0 +1,27 @@
+<div id="page_content_inner">
+<h3 class="heading_b uk-margin-bottom">Баннеры</h3>
+    <div class="md-card">
+        <div class="md-card-content">
+            <div class="uk-overflow-container uk-margin-bottom">
+                <table class="uk-table uk-table-nowrap uk-table-hover " id="ts_pager_filter">
+                    <thead>
+                        <tr>
+                            <th>Первью</th>
+                            <th class="uk-text-center" >Ссылка</th>
+                            <th class="uk-text-center" >Название</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @banners.each do |banner| %>
+                        <tr>
+                            <td><img class="img_thumb" src="<%= banner.image.list_thumb %>" ></td>
+                            <td class="uk-text-center" ><%= banner.link %></td>
+                            <td class="uk-text-center" ><%= link_to banner.title, edit_administrators_banner_path(banner) %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

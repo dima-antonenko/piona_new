@@ -1,0 +1,41 @@
+<div id="page_content_inner">
+    <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+        <div class="uk-width-xLarge-10-10  uk-width-large-10-10">
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container uk-margin-bottom">
+                        <table class="uk-table uk-table-nowrap uk-table-hover" id="ts_pager_filter">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th class="uk-text-center">Название товара</th>
+                                    <th class="uk-text-center">Артикул товара</th>
+                                    <th class="uk-text-center">Телефон</th>
+                                    <th class="uk-text-center">Создан</th>
+                                    <th class="uk-text-center">Удалить</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @back_calls.each do |item| %>
+                                <tr class="item<%= item.id %>">
+                                    <td><%= item.id %></td>
+                                    <td class="uk-text-center"><%= "Название товара" %></td>
+                                    <td class="uk-text-center"><%= item.product_id %></td>
+                                    <td class="uk-text-center"><%= item.phone %></td>
+                                    <td class="uk-text-center"><%= item.created_at %></td>
+                                    <td class="uk-text-center"><%= link_to "<i class=\"material-icons md-24\">&#xE872;</i>".html_safe, administrators_back_call_path(item), method: :delete, remote: true, data: {confirm: "Удалить запись ?"} %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="will_paginate_plugin uk-text-center">
+                        <%= will_paginate @back_calls %>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

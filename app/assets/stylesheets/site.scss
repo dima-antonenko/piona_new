@@ -1,0 +1,83 @@
+// require_directory ./site/theme
+
+
+.product-list li .add-to-cart a {
+  background: none;
+  padding-left: 0;
+}
+
+.buy_area {
+
+  padding-top: 20px !important;
+
+  .add_to_cart{
+    width: 30%;
+  }
+
+  .buy_for_phone{
+    width: 70%;
+
+    input {
+      width: 57%;
+      float: left;
+      clear: right;
+    }
+
+    .btn-add-cart{
+      width: 40%;
+      float: right;
+      height: 33px;
+    }
+  }
+}
+
+
+#back_call{
+
+  #back_call_phone {
+    width: 30%;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .btn-add-cart{
+   height: 33px;
+  }
+
+}
+
+
+#create_question {
+
+  .input {
+      width: 57%;
+  }
+
+}
+
+
+#create_request{
+
+  .input{
+      width: 57%;
+  }
+  
+}
+
+.header-top-right .homeslider{
+   width: 100%;
+}
+
+#footer{
+  padding:  10px 0 5px 0;
+}
+
+.select2-search__field {
+  display: none;
+}
+
+.pb-right-column {
+.form-action ,.buy_area {
+    border-top: none !important;
+  }
+}

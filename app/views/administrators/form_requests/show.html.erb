@@ -1,0 +1,28 @@
+<div id="page_heading">
+    <h1 id="product_edit_name">Заявка № <%= @request.id %></h1>
+    <span class="uk-text-muted uk-text-upper uk-text-small" id="product_edit_sn">Дата создания: <%= @request.created_at %></span>
+</div>
+<div id="page_content_inner">
+    <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+        <div class="uk-width-xLarge-10-10  uk-width-large-10-10">
+            <h3 class="heading_b uk-margin-bottom">Информация о авторе</h3>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container uk-margin-bottom">
+                          <p><span class="uk-text-bold">Имя: </span> <%= @request.name %></p>
+                          <p><span class="uk-text-bold">Email: </span> <%= @request.email %></p>
+                          <p><span class="uk-text-bold">Номер телефона: </span> <%= @request.phone %></p>
+                          <p><span class="uk-text-bold">Текст сообщения: </span> <%= @request.text %></p>
+
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        </div>
+    </div>
+    <div class="md-fab-wrapper">
+        <a class="md-btn" href="/administrators/form_requests/">Назад</a>
+        <%= link_to "Удалить".html_safe, administrators_form_request_path(@request), method: :delete, class: "md-btn md-btn-danger" %>
+    </div>
+</div>

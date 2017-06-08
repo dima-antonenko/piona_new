@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+      <meta content="Default Description" name="description">
+      <meta content="" name="keywords">
+      <meta content="INDEX,FOLLOW" name="robots">
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport">
+      <link rel="icon" type="images/favicon" href="/site_theme/images/favicon.png">
+      <!-- fonts -->
+      <link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,700italic' rel='stylesheet' type='text/css'>
+      <link href="/site_theme/font/css/pe-icon-7-stroke.css" media="all" type="text/css" rel="stylesheet"/>
+      <link href="/site_theme/font/css/font-awesome.min.css" media="all" type="text/css" rel="stylesheet"/>
+      <!-- style -->
+      <link href="/site_theme/css/wow.css" media="all" type="text/css" rel="stylesheet"/>
+      <link rel="stylesheet" href="/site_theme/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="/site_theme/css/swiper.min.css">
+      <link href="/site_theme/css/styles.css" media="all" type="text/css" rel="stylesheet" />
+      <%= stylesheet_link_tag 'site', media: 'all' %>
+      <%= csrf_meta_tags %>
+      <title><%= yield(:seo_title) %></title>
+      <script src="/site_theme/js/plugin/plugin.js"></script>
+      <script src="/site_theme/js/owl.carousel-2.js"></script>
+      <script src="/site_theme/js/jquery.prettyPhoto.js"></script>
+      <script src="/site_theme/js/swiper.min.js"></script>
+      <script src="/site_theme/js/jquery.zoom.js"></script>
+      <script src="/site_theme/js/nautica.js"></script>
+      <script src="/site_theme/js/engo-apps.js"></script>
+
+   </head>
+   <body>
+      <div id="page">
+         <div class="wrapper-inner row-offcanvas row-offcanvas-left">
+            <div class="page-wrapper page full-widthv2">
+               
+               <%= render '/layouts/site/header' %>
+               
+               <%= yield %>
+               <%= render '/layouts/site/footer' %>
+               
+               <!-- back-top -->
+               <div id="back-top" class="back-top">
+                  <i class="fa fa-long-arrow-up"></i>
+               </div>
+            </div>
+         </div>
+         <!--END PAGE FOOTER -->
+      </div>
+      <!-- js -->
+      
+
+
+      
+
+      <%=  javascript_include_tag 'site' %>
+  
+   </body>
+</html>

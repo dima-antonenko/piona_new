@@ -1,0 +1,51 @@
+/* line 4, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.product-list li .add-to-cart a {
+  background: none;
+  padding-left: 0;
+}
+
+/* line 9, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.buy_area {
+  padding-top: 20px !important;
+}
+/* line 13, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.buy_area .add_to_cart {
+  width: 30%;
+}
+/* line 17, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.buy_area .buy_for_phone {
+  width: 70%;
+}
+/* line 20, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.buy_area .buy_for_phone input {
+  width: 57%;
+  float: left;
+  clear: right;
+}
+/* line 26, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+.buy_area .buy_for_phone .btn-add-cart {
+  width: 40%;
+  float: right;
+  height: 33px;
+}
+
+/* line 37, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+#back_call #back_call_phone {
+  width: 30%;
+  float: left;
+  margin-right: 20px;
+}
+/* line 43, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+#back_call .btn-add-cart {
+  height: 33px;
+}
+
+/* line 52, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+#create_question .input {
+  width: 57%;
+}
+
+/* line 61, /home/dima/Rails/laston_cms/app/assets/stylesheets/site.scss */
+#create_request .input {
+  width: 57%;
+}

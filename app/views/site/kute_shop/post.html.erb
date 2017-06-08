@@ -1,0 +1,68 @@
+<% provide(:class, 'category-page  option6') %>
+
+<% provide(:seo_title, @post.meta_title) %>
+<% provide(:seo_description, @post.meta_description) %>
+<% provide(:seo_keywords, @post.meta_keywords) %>
+
+<div class="columns-container">
+    <div class="container" id="columns">
+       
+        <div class="row">
+        
+            <div class="center_column col-xs-12 col-sm-12" id="center_column">
+                <h1 class="page-heading">
+                    <span class="page-heading-title2"><%= @post.name %></span>
+                </h1>
+                <article class="entry-detail">
+                    <div class="entry-meta-data">
+                        
+                        <span class="cat">
+                            <i class="fa fa-folder-o"></i>
+                            <%= link_to @post_category.name, post_category_path(@post_category) %>
+                        </span>
+                        <span class="date"><i class="fa fa-calendar"></i> <%= @post.created_at.to_date %></span>
+                        
+                    </div>
+                    <div class="entry-photo">
+                        <img src="<%= @post.avatar.page_show %>" alt="Blog">
+                    </div>
+                    <div class="content-text clearfix">
+                       <%= @post.content.html_safe %>
+                    </div>
+
+                </article>
+                <!-- Related Posts -->
+                <div class="single-box">
+                    <h2>Случайные записи</h2>
+                    <ul class="related-posts owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":2},"1000":{"items":3}}'>
+                    <% @random_posts.each do |post| %>
+                        <li class="post-item">
+                            <article class="entry">
+                                <div class="entry-thumb image-hover2">
+                                    <a href="<%= post_path(post) %>">
+                                        <img src="<%= post.avatar.page_show_related_items %>" >
+                                    </a>
+                                </div>
+                                <div class="entry-ci">
+                                    <h3 class="entry-title"><%= link_to post.name, post_path(post) %></h3>
+                                    <div class="entry-meta-data">
+                                        
+                                        <span class="date">
+                                            <i class="fa fa-calendar"></i> <%= post.created_at.to_date %>
+                                        </span>
+                                    </div>
+                                    <div class="entry-more">
+                                        <%= link_to "Подробнее", post_path(post) %>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    <% end %>
+                    </ul>
+                </div>
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>

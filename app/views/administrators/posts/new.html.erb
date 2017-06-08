@@ -1,0 +1,87 @@
+<div id="page_heading">
+    <h1 id="product_edit_name">Новая запись ленты новостей</h1>
+</div>
+<div id="page_content_inner">
+    <%= form_for([:administrators, @post], class: "uk-form-stacked", :multipart => true ) do |f| %>
+    <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+        <div class="uk-width-xLarge-7-10  uk-width-large-7-10">
+            <div class="md-card">
+                <div class="md-card-content large-padding">
+                    <div class="uk-grid uk-grid-divider uk-grid-medium" data-uk-grid-margin>
+                        <div class="uk-width-large-2-2">
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Название</label>
+                                
+                                <%= f.text_field :name, class: "md-input" %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Родительская категория</label>
+                                <%= f.select :post_category_id , @access_categores,{include_blank: 'Не выбрано'}, {"data-md-selectize ": true} %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Ссылка</label>
+                                
+                                <%= f.text_field :slug, class: "md-input" %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Контент</label>
+                                <%= f.cktext_area :content, class: 'ckeditor' %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Лид</label>
+                                <%= f.cktext_area :lead, class: 'ckeditor' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card">
+                <div class="md-card-content large-padding">
+                    <div class="uk-grid uk-grid-divider uk-grid-medium" data-uk-grid-margin>
+                        <div class="uk-width-large-2-2">
+                            
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Мета - title</label>
+                                
+                                <%= f.text_field :meta_title, class: "md-input" %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Мета - description</label>
+                                
+                                <%= f.text_area :meta_description, class: "md-input", rows: 6, cols: 30 %>
+                            </div>
+                            <div class="uk-form-row">
+                                <label for="product_edit_name_control">Мета - keywords</label>
+                                
+                                <%= f.text_area :meta_keywords, class: "md-input", rows: 6, cols: 30 %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="uk-width-xLarge-3-10  uk-width-large-3-10">
+            <div class="md-card">
+                <div class="md-card-toolbar">
+                    <div class="md-card-toolbar-actions">
+                        <%= f.file_field :avatar, class: "product_file_upload" %>
+                    </div>
+                    <h3 class="md-card-toolbar-heading-text">
+                    Аватар
+                    </h3>
+                </div>
+                <div class="md-card-content">
+                    <div class="uk-margin-bottom uk-text-center uk-position-relative">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-fab-wrapper">
+            <a class="md-btn" href="/administrators/posts">Назад</a>
+            <%= f.submit(class: "md-btn md-btn-success", value: "Сохранить") %>
+        </div>
+    </div>
+    <% end %>
+</div>

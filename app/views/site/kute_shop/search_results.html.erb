@@ -1,0 +1,59 @@
+<% provide(:class, 'category-page') %>
+<% provide(:seo_title, 'Результаты поиска') %>
+
+<div class="columns-container">
+    <div class="container" id="columns">
+     
+        <div class="row">
+           
+            <div class="center_column col-xs-12 col-sm-12" id="center_column">
+            
+            
+              
+
+                <div id="view-product-list" class="view-product-list">
+                    <h2 class="page-heading">
+                        <span class="page-heading-title">Результататы поиска по запросу "<%= params["search_value"] %>"</span>
+                    </h2>
+                        
+                    <ul class="row product-list grid">
+                      <% @products.each do |product| %>
+                        <li class="col-sx-12 col-sm-4">
+                            <div class="product-container">
+                                <div class="left-block">
+                                    <a href="#">
+                                        <img class="img-responsive" alt="product" src="<%= product.avatar.page_category %>" />
+                                    </a>
+                                   
+                                    <div class="add-to-cart">
+                                        <%= link_to "Подробнее", product_path(product) %>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <h5 class="product-name"><%= link_to product.name, product_path(product) %></h5>
+                                    <div class="content_price">
+                                        <span class="price product-price"><%= product.price %> р.</span>
+                                    </div>
+
+                            </div>
+                        </li>
+
+                        <% end %>
+                    </ul>
+                </div>
+
+                <div class="sortPagiBar">
+                    <div class="bottom-pagination">
+                        <nav>
+                          <%= will_paginate @products %>
+                        </nav>
+                    </div>
+
+
+                </div>
+            </div>
+       
+        </div>
+     
+    </div>
+</div>
