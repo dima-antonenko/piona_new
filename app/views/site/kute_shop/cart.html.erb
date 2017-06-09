@@ -1,79 +1,123 @@
-<% provide(:class, 'category-page') %>
-<div class="columns-container">
-  <div class="container" id="columns">
-    
-    <!-- ./breadcrumb -->
-    <!-- page heading-->
-    <% if @line_items.size > 0 %>
-    <h2 class="page-heading">
-    <span class="page-heading-title2">Корзина</span>
-    </h2>
-    <div class="page-content checkout-page">
-      <div class="box-border">
-        <table class="table table-bordered table-responsive cart_summary">
-          <thead>
-            <tr>
-              <th class="cart_product">Фото</th>
-              <th>Название</th>
-              <th>Цена за еденицу</th>
-              <th>Кол-во</th>
-              <th>Окончательная цена</th>
-              <th  class="action"><i class="fa fa-trash-o"></i></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @line_items.each do |item| %>
-            <tr>
-              <td class="cart_product">
-                <a href="#"><img src="<%= item.product.avatar.page_category %>" alt="Product"></a>
-              </td>
-              <td class="cart_description">
-                <p class="product-name">
-                <%= link_to item.product.name, product_path(item.product) %></p>
-                <small class="cart_ref">Артикул : <%= item.product.id %></small><br>
-              </td>
-              
-              <td class="price"><span><%= item.product_price %> р.</span></td>
-              <td class="qty">
-                <%= item.quantity %>
-              </td>
-              <td class="price">
-                <span><%= item.total_price %> р.</span>
-              </td>
-              <td class="action">
-                <%= link_to "Удалить".html_safe, line_item_path(item), method: :delete %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td colspan="2" rowspan="2"></td>
-            <td colspan="3">Всего:</td>
-            <td colspan="2"><%= @cart.total_price %> р.</td>
-          </tr>
-          
-          </tfoot>
-        </table>
-        <%= link_to "Очистить корзину", cart_path(@cart), method: :delete, class: 'button pull-right'  %>
-      </div>
-      <h3 class="checkout-sep">Контакты покупателя</h3>
-      <div class="box-border">
-        <%= form_for @order,remote: true, authenticity_token: true do |f| %>
-        <%= f.text_field :customer_name, placeholder: "Имя", class: "input form-control" %><br/>
-        <%= f.text_field :customer_email, placeholder: "Email", class: "input form-control" %><br/>
-        <%= f.text_field :customer_phone, placeholder: "Телефон", class: "input form-control" %><br/>
-        <%= f.text_area :customer_city, placeholder: "Город", class: "input form-control" %><br/>
-        <%= f.text_area :customer_address, placeholder: "Адрес", class: "input form-control" %><br/>
-        
-        <%= f.submit "Оформить заказ", class: "btn-add-cart" %>
-        <% end %>
-      </div>
+<main class="wrapper main-content detail cart_page">
+    <!-- breadcrumb -->
+    <div class="breadcrumbs">
+        <div class="container">
+          <ul class="items">
+                <li class="item home">
+            
+                     <h3>Корзина</h3>
+                </li>
+               
+            </ul>
+        </div>
     </div>
-  </div>
-  <% else %>
+
+<% if @line_items.size > 0 %>
+    
+    <div class="container">
+   
+
+            <!-- Form cart -->
+            <form class="cart-form" action="#">
+                <div class="table-responsive">
+                  <table class="table cart-table">
+                      <thead>
+                         <tr>
+                              <th></th>
+                              <th class="product-name title">Товар</th>
+                              <th >Название</th>
+                              <th>Цена за еденицу</th>
+                              <th>Кол-во</th>
+                              <th>Стоимость</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        <% @line_items.each do |item| %>
+                         <tr>
+                              <td class="product-remove">
+                                 <%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, line_item_path(item), method: :delete, class: 'remove' %>
+                              </td>
+                              <td class="product-img clearfix">
+                                <a href="<%= product_path(item.product) %>">
+                                <%= image_tag item.product.avatar.main_page %>
+                                 </a>
+                              </td>
+                              <td class="product-name-ct">
+                                 <%= link_to item.product.name, product_path(item.product) %></p>
+                              </td>
+                            <td class="product-price">
+                                <p class="price"> <%= item.product_price %> р.</p>
+                            </td>
+                              <td>
+                                <%= item.quantity %> 
+                              </td>
+                              <td class="product-subtotal">
+                                <p class="price"><%= item.total_price %> р.</p>
+                              </td>
+                         </tr>
+                         <% end %>
+                        
+                         
+                      </tbody>
+                  </table>
+                </div>
+           </form>
+           <!-- end form cart -->
+
+
+           <div class="cart-collaterals row">
+              <div class="col-md-6">
+                 <div class="cal-shipping">
+                    <h3>Контакты покупателя</h3>
+                    <%= form_for @order, remote: true, authenticity_token: true do |f| %>
+                      
+                       <div class="input-text cart-input">
+                          <%= f.text_field :customer_name, placeholder: "Имя", class: "input form-control" %>
+                       </div>
+                       <div class="input-text cart-input">
+                         <%= f.text_field :customer_email, placeholder: "Email", class: "input form-control" %>
+                       </div>
+                       <div class="input-text cart-input">
+                          <%= f.text_field :customer_phone, placeholder: "Телефон", class: "input form-control" %>
+                       </div>
+                       <div class="input-text cart-input">
+                          <%= f.text_area :customer_city, placeholder: "Город", class: "input form-control" %>
+                       </div>
+                       <div class="input-text cart-input">
+                          <%= f.text_area :customer_address, placeholder: "Адрес", class: "input form-control" %>
+                       </div>
+                       <div class="input-submit">
+                          <%= f.submit "Оформить заказ", class: "btn-add-cart" %>
+                          <%= link_to "Очистить корзину", cart_path(@cart), method: :delete, class: 'button pull-right'  %>
+                       </div>
+                    <% end %>
+                 </div>
+                 <!-- .cal-shipping -->
+              </div>
+              <div class="col-md-6">
+                 <div class="cal-shipping">
+                 
+                    <table>
+                       
+                       <tr class="order-total">
+                          <th>
+                             <div class="black-bg">Всего :</div>
+                          </th>
+                          <td>
+                             <div class="black-bg"><strong><span class="amount"><%= @cart.total_price %> р.</span></strong></div>
+                          </td>
+                       </tr>
+                    </table>
+                 </div>
+                 <!-- .cal-shipping -->
+              </div>
+           </div>
+           
+    </div>
+<% else %>
   <h2 class="page-heading">
-    <span class="page-heading-title2">Корзина пустая</span>
+    <span class="page-heading-title2 blank_cart_text">Корзина пустая</span>
     </h2>
   <% end %>
-</div>
+
+  </main>

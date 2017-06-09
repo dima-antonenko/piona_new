@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608111327) do
+ActiveRecord::Schema.define(version: 20170609081859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,7 +191,8 @@ ActiveRecord::Schema.define(version: 20170608111327) do
     t.string  "meta_title",          default: ""
     t.text    "meta_description",    default: ""
     t.text    "meta_keywords",       default: ""
-    t.string  "large_avatar",        default: "", null: false
+    t.string  "large_avatar",        default: "",    null: false
+    t.boolean "on_main_page",        default: false, null: false
     t.index ["avatar"], name: "index_product_categories_on_avatar", using: :btree
     t.index ["description"], name: "index_product_categories_on_description", using: :btree
     t.index ["name"], name: "index_product_categories_on_name", using: :btree

@@ -1,21 +1,16 @@
 class Site::StaticPagesController < SiteController
 
   def home
-  #  @page = Page.find_by(descriptor: 'home')
+    @page = Page.find_by(descriptor: 'home')
   #  @slides = Slider.find_by(descriptor: 'main').slides
+    @product_categories = ProductCategory.where(on_main_page: true)
     @products = Product.all
-    @new_products = Product.last(5)
-    @cheap_products = Product.order(:price).limit(5)
+    @random_products =  Product.order("RANDOM()").limit(7)
     render theme_path('home')
   end
 
   def contacts
     @page = Page.find_by(descriptor: 'contacts')
-    render theme_path('static_page')
-  end
-
-  def company_info
-    @page = Page.find_by(descriptor: 'company_info')
     render theme_path('static_page')
   end
 

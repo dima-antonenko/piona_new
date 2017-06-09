@@ -27,8 +27,8 @@ content_description_page = "<p>После оформления заказа ре
 <p><b>Условия возврата</b></p>
 
 <ul>
-	<li>- Написать на корпоративную почту email@test.ru, связаться с менеджером по одному из указанных телефонов на сайте или посредством чата и предоставить следующую необходимую информацию для возврата: номер и дата заказа, Ф.И.О., артикул товара, причину возврата.</li>
-	<li>- Проверить товарный вид и целостность возвращаемых изделий и упаковки (наличие сохранных ярлыков, бирок, упаковок со штрих-кодом; отсутствие следов носки, пятен и других загрязнений). Товары с признаками использования и не соответствующие требованиям выше - не возвращаются.</li>
+  <li>- Написать на корпоративную почту email@test.ru, связаться с менеджером по одному из указанных телефонов на сайте или посредством чата и предоставить следующую необходимую информацию для возврата: номер и дата заказа, Ф.И.О., артикул товара, причину возврата.</li>
+  <li>- Проверить товарный вид и целостность возвращаемых изделий и упаковки (наличие сохранных ярлыков, бирок, упаковок со штрих-кодом; отсутствие следов носки, пятен и других загрязнений). Товары с признаками использования и не соответствующие требованиям выше - не возвращаются.</li>
 </ul>
 
 <p>Прошу обратить внимание, что все затраты связанные с возвратом и обменом товара несет покупатель.</p>
@@ -334,7 +334,7 @@ user.save
 ####################
 ####################
 
-
+=begin
 product_category = ProductCategory.friendly.find('slug-category-0')
 10.times do |t|
     product = Product.new(product_category_id: product_category.id, description: product_description, price: t * 100,
@@ -350,3 +350,50 @@ product_category = ProductCategory.friendly.find('slug-category-0')
     end
     product.save
 end    
+
+=end
+
+####################
+# Категории товаров
+####################
+=begin
+ProductCategory.destroy_all
+
+categories = ['Новинки', 'Распродажа', 'Наборы', 'Женская парфюмерия', 'Мужская парфюмерия', 'Арабская парфюмерия', 'Атомайзеры']
+
+categories.each  do |category_name|
+  category =  ProductCategory.new(name: category_name, description: product_category_description, slug:"slug-category-#{category_name}", on_main_page: true)
+
+  File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
+    category.avatar = f
+  end
+
+  category.save
+end
+
+all_categories = ProductCategory.all
+child_categories = ['Гель для душа', 'Дезодорант', 'Духи', 'Лосьон для тела', 'Одеколон', 'Тестер']
+
+all_categories.each do |product_category|
+  
+  child_categories.each do |category_name|
+    category = ProductCategory.new(product_category_id: product_category.id, description: product_category_description, name: category_name)
+    category.slug = "category-#{product_category.id}-#{product_category.id}"
+
+    File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
+      category.avatar = f
+    end
+    category.save
+  end
+
+end
+=end
+####################
+####################
+Page.destroy_all
+
+Page.create(name: "Главная", descriptor: "home", description: content_description_page)
+Page.create(name: "Контакты", descriptor: "contacts", description: content_description_page)
+Page.create(name: "Информаци о доставке", descriptor: "delivery_info", description: content_description_page)
+Page.create(name: "Информаци о оплате", descriptor: "payment_info", description: content_description_page)
+Page.create(name: "Условия обслуживания", descriptor: "terms_of_service", description: content_description_page)

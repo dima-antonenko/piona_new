@@ -18,4 +18,11 @@ class ProductCategoryAvatarUploader < CarrierWave::Uploader::Base
   end
 
 
+
+  # главная страница
+  version :main_page do
+   process resize_to_fill: [732,1024]
+  end
+  
+
 end

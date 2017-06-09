@@ -85,3 +85,26 @@
 .quick_order{
   float: left !important;
 }
+
+.main_page{
+  .categories_list{
+    .product-item{
+       margin-bottom: 30px;
+    }
+    .product-item-link{
+      font-size: 20px;
+    }
+  }
+}
+
+.cart_page{
+  .breadcrumbs{
+    h3{
+      line-height: 55px;
+    }
+  }
+  .blank_cart_text{
+    line-height: 500px;
+    padding-left: 30px;
+  }
+}
