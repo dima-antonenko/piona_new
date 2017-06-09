@@ -1,600 +1,281 @@
 <main class="wrapper main-content detail detail-v2">
-        <!-- breadcrumb -->
-        <div class="breadcrumbs clearfix">
-            <div class="container-full-screen">
-                <ul class="items">
-                <li class="item home">
-                        <a href="#" title="Go to Home Page">Home</a>
-                </li>
-                <li class="item category">
-                        <a href="#" >Women</a>
-                </li>
-                <li class="item product-item">
-                    <strong>Legging Cathedral</strong>
-                </li>
-            </ul>
-            </div>
-        </div>
-        <!-- End breadcrumbs -->
-
-        <!-- product single -->
-        <div class="product-single clearfix">
-            <div class="container container-no-padding custom-container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-12">
-                     <div id="owl-product-image" class="product-image owl">
-                        <div id="owl-carousel" class="owl-carousel carousel-product margin-bottom-10">
-                           <div class=" item">
-                              <a class="ProductPhotoImg" href="#" >
+<!-- breadcrumb -->
+<div class="breadcrumbs clearfix">
+    <div class="container-full-screen">
+        <ul class="items">
+            
+            <li class="item product-item">
+                <%= link_to @product.product_category.name, product_category_path(@product.product_category) %>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- End breadcrumbs -->
+<!-- product single -->
+<div class="product-single clearfix">
+    <div class="container container-no-padding custom-container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div id="owl-product-image" class="product-image owl">
+                    <div id="owl-carousel" class="owl-carousel carousel-product margin-bottom-10">
+                        <div class=" item">
+                            <a class="ProductPhotoImg" href="#" >
                                 <%= image_tag @product.avatar.page_product_main %>
-                              </a>
-                           </div>
-                           <% @attacments.each do |attacment| %>
-                           <div class=" item">
-                              <a class="ProductPhotoImg" href="#" >
-                              <%= image_tag attacment.image.page_product %>
-                              </a>
-                           </div>
-                           <% end %>
+                            </a>
                         </div>
-                     </div>
-                     <div class="product-thumbnails">
-                        <div id="ProductThumbs" class=" owl-carousel owl-product-thumbs margin-bottom-0">
                         <% @attacments.each do |attacment| %>
-                           <div class=" item thumbnails">
-                              <a href="javascript:" class="product-single__thumbnail">
-                             <%= image_tag attacment.image.page_product_thumb %>
-                              </a>
-                           </div>
-                           <% end %>
+                        <div class=" item">
+                            <a class="ProductPhotoImg" href="#" >
+                                <%= image_tag attacment.image.page_product %>
+                            </a>
                         </div>
-                     </div>
-                     <script type="text/javascript">
-                        (function ($, window, document) {
-                           var api_images = ["/images/product/1.jpg","/images/product/1-2.jpg"];
+                        <% end %>
+                    </div>
+                </div>
+                <div class="product-thumbnails">
+                    <div id="ProductThumbs" class=" owl-carousel owl-product-thumbs margin-bottom-0">
+                        <% @attacments.each do |attacment| %>
+                        <div class=" item thumbnails">
+                            <a href="javascript:" class="product-single__thumbnail">
+                                <%= image_tag attacment.image.page_product_thumb %>
+                            </a>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                (function ($, window, document) {
+                var api_images = ["/images/product/1.jpg","/images/product/1-2.jpg"];
+                
+                var slide_show = $("#owl-product-image #owl-carousel");
+                var slide_thumb = $(".owl-product-thumbs");
+                
+                slide_show.owlCarousel({
+                items:1,
+                loop:true,
+                slideBy: 1,
+                dotData: true,
+                onInitialized : init_click_scroll,
+                onChanged: this_zoom,
+                onRefreshed: this_zoom
+                });
+                
+                slide_thumb.owlCarousel({
+                autoPlay: false,
+                items : 4,
+                nav: true,
+                dots: false,
+                onInitialized : function(){
+                slide_thumb.css("visibility","visible");
+                }
+                
+                });
+                $('.owl-item', slide_thumb).not('.cloned').each(function(index) {
+                $(this).click(function(){
+                owl_slide.to(index);
+                })
+                });
+                
+                var owl_slide = slide_show.data('owlCarousel');
+                
+                $('.owl-item', slide_show).not('.cloned').each(function(index) {
+                $(this).click(function(){
+                owl_slide.to(index);
+                })
+                });
+                function init_click_scroll() {
+                slide_show.css('visibility','visible');
+                $('.owl-item', slide_show).not('.cloned').each(function(index) {
+                $(this).click(function(){
+                owl_slide.to(index);
+                this_zoom();
+                });
+                });
+                }
+                function this_zoom(){
+                var current = this._current;
+                $(slide_show).find(".owl-item").eq(current).hover(
+                function () {
+                setTimeout($(this).zoom(),100);
+                $(this)
+                
+                },
+                function () {
+                $(this).trigger('zoom.destroy');
+                
+                }
+                );
+                
+                }
+                function build_gallery(){
+                $(".click-to-gallery").click(function(){
+                $.prettyPhoto.open(api_images);
+                });
+                
+                }
+                function cancel_gallery() {
+                $.prettyPhoto.close();
+                }
+                
+                
+                
+                
+                })(jQuery);
+                </script>
+            </div>
+            <div class="col-sm-6 col-xs-12 custom-col-detail">
+                <!-- product-shop -->
+                <div class="product-shop">
+                    <h1 class="product-name"><%= @product.name %></h1>
+                    <div class="product-review">
                         
-                           var slide_show = $("#owl-product-image #owl-carousel");
-                           var slide_thumb = $(".owl-product-thumbs");
+                    </div>
+                    <div class="price-box product-single-prices">
+                        <span class="price">
+                            <%= @product.price %> р.
+                        </span>
                         
-                           slide_show.owlCarousel({
-                              items:1,
-                              loop:true,
-                              slideBy: 1,
-                              dotData: true,
-                              onInitialized : init_click_scroll,
-                              onChanged: this_zoom,
-                              onRefreshed: this_zoom                                              
-                           });
-                        
-                           slide_thumb.owlCarousel({
-                              autoPlay: false,
-                              items : 4,
-                              nav: true,                                            
-                              dots: false,
-                              onInitialized : function(){
-                                 slide_thumb.css("visibility","visible");
-                              }
-                        
-                           });
-                           $('.owl-item', slide_thumb).not('.cloned').each(function(index) {
-                              $(this).click(function(){
-                                 owl_slide.to(index);
-                              })
-                           });
-                        
-                           var owl_slide = slide_show.data('owlCarousel');
-                        
-                           $('.owl-item', slide_show).not('.cloned').each(function(index) {
-                              $(this).click(function(){
-                                 owl_slide.to(index);
-                              })
-                           });
-                           function init_click_scroll() {
-                              slide_show.css('visibility','visible');
-                              $('.owl-item', slide_show).not('.cloned').each(function(index) {
-                                 $(this).click(function(){
-                                    owl_slide.to(index);
-                                    this_zoom();
-                                 });
-                              });
-                           }
-                           function this_zoom(){
-                              var current = this._current;
-                              $(slide_show).find(".owl-item").eq(current).hover(
-                                 function () {
-                                    setTimeout($(this).zoom(),100);
-                                    $(this)
-                        
-                                 },
-                                 function () {
-                                    $(this).trigger('zoom.destroy');
-                        
-                                 }
-                                 );
-                        
-                           }
-                           function build_gallery(){
-                              $(".click-to-gallery").click(function(){
-                                 $.prettyPhoto.open(api_images);
-                              });
-                        
-                           }
-                           function cancel_gallery() {
-                              $.prettyPhoto.close();
-                           }
-                        
-                        
-                        
-                        
-                        })(jQuery);
-                     </script>                              
-                  </div>
-                    <div class="col-sm-6 col-xs-12 custom-col-detail">
-                        <!-- product-shop -->
-                        <div class="product-shop">
-                            <h1 class="product-name">Legging Cathedral</h1>
-                            <div class="product-review">
-                                <div class="ratings">
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star empty"></i>
-                                        <i class="fa fa-star empty"></i>
-        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="price-box product-single-prices">
-                                <span class="price">
-                                    $ 35.00
-                                </span>
-                                <span class="old-price">
-                                    $ 50.00
-                                </span> 
-                            </div>
-                            <div class="product-description des">
-                                <p>
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-                                </p>
-                            </div>
-
-                            <!-- form add to cart -->
-                            <form id="AddToCartForm" enctype="multipart/form-data" method="post" action="/cart/add">
-                                <div class="product-signle-options clearfix">
-                                    <div class="selector-wrapper color">
-                                        <label>Color :</label>
-                                        <select class="single-option-selector">
-                                            <option>--Select option--</option>
-                                            <option value="red">Red</option>
-                                            <option value="blue">Blue</option>
-                                        </select>
-                                    </div>
-                                    <div class="selector-wrapper size">
-                                        <label>Size :</label>
-                                    
-                                        <select class="single-option-selector">
-                                            <option>--Select option--</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                        </select>
-                                    </div>
-                               <div class="selector-wrapper size">
-                                 <label>QTY :</label>
-                                 <div class="quantity">
-                                    <input step="1" min="0" value="1" title="Qty" class="qty" size="4" type="number">
-                                 </div>
-                              </div>
-                                    
-                                </div>
-
-                                <div class="product-single-action">
-                                  <div class="action add-to-cart">
-                                        <a href="#">
-                                            Add to cart
-                                        </a>
-                                    </div>
-                                    <div class="action add-to-wishlist">
-                                        <a href="#">
-                                            Add to wishlist
-                                        </a>
+                    </div>
+                    <div class="product-description des">
+                        <%= @product.short_description %>
+                    </div>
+                    <!-- form add to cart -->
+                    <div id="AddToCartForm">
+                        <div class="product-signle-options clearfix">
+                            <%= form_tag('/orders/create_quick', remote: true, authenticity_token: true, class: 'quick_order') do %>
+                            <div class="selector-wrapper color">
                                 
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- End form -->
-
-                            <!-- Share this -->
-                            <div class="sharing-box">
-                               <h4>Share this :</h4>
-                               <div class="social-sharing clearfix normal">
-                                     <a class="share-twitter" href="/#" target="_blank">
-                                        <i class="fa fa-twitter"></i>      
-                                    </a>
-                                    
-                                    <a class="share-pinterest" href="/#" target="_blank">
-                                        <i class="fa fa-pinterest"></i>      
-                                    </a>
-                                     
-                                     <a class="share-facebook" href="#" target="_blank">
-                                        <i class="fa fa-facebook"></i>     
-                                    </a>
-                                    <a class="share-behance" href="/#" target="_blank">
-                                        <i class="fa fa-behance"></i>      
-                                    </a>
-                                    <a class="share-dribbble" href="/#" target="_blank">
-                                        <i class="fa  fa-dribbble"></i>      
-                                    </a>
-                               </div>
+                                <%= text_field_tag 'customer_phone', '', class: 'form-control input', width: 10, placeholder: "Номер телефона"  %>
+                                <%= hidden_field_tag 'product_id', @product.id %>
+                                
                             </div>
-                            <!-- End share this -->
+                            <div class="selector-wrapper color">
+                                <%= submit_tag 'Купить в один клик', class: "btn-add-cart" %>
+                                
+                            </div>
+                            <% end %>
+                            
+                            <div class="selector-wrapper color">
+                                <div class="action add-to-cart">
+                                    <% if @product.in_cart?(@minicart) %>
+                                    <div class="product-price-group"><span class="price">уже в корзине</span></div>
+                                    <% else %>
+                                    <%= button_to 'Добавить в корзину', line_items_path(product_id: @product), {class: "btn btn-primary"} %>
+                                    <% end %>
+                                </div>
+                            </div>
                         </div>
-                        <!-- end product-shop -->
-                        <!-- tab -->                
+                        
+                    </div>
+                    
+                </div>
+                
                 <div class="tabs-container">
                    <ul class="tabs clearfix margin-top-30">
-                      <li><a class="active" href="#tab-description">Description</a></li>
-                      <li><a href="#tab-reviews" >Reviews</a></li>
-                      <li><a href="#tab-add_tags" >Add Tags</a></li>
+                      <li><a class="active" href="#tab-description">Описание</a></li>
+                        <li><a href="#tab-back_call" >Обратный звонок</a></li>
+                        <li><a href="#tab-question" >Задать вопрос</a></li>
+                        <li><a href="#tab-form_request" >Отправить заявку</a></li>
                    </ul>
+                   
                    <div style="display: block;" id="tab-description" class="tab-content tab-description">
-                      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                   </div>
-                   <!-- tab-review -->
-                   <div id="tab-reviews" class="tab-content tab-reviews">
-                      <div id="reviews">
-                        <div id="comments">
-                                    
-                            <ul class="commentlist">
-                                <!-- comment -->
-                               <li class="comment">
-                                    <div class="comment_container">
-                                        <img class="avatar" alt="" src="/site_theme/images/author-1.png">
-                                        <div class="comment-info">
-                                            <h4 class="name">MICHAEL VANCE</h4>
-                                            <span class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                            </span>
-                                            <span class="date">03 MINS AGO</span>
-                                            <div class="description">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                            </div>
-                                        </div> 
-                                    </div>
-                               </li>
-                               <!-- comment -->
-                               <li class="comment">
-                                    <div class="comment_container">
-                                        <img class="avatar" alt="" src="/site_theme/images/author-1.png">
-                                        <div class="comment-info">
-                                            <h4 class="name">MICHAEL VANCE</h4>
-                                            <span class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                            </span>
-                                            <span class="date">03 MINS AGO</span>
-                                            <div class="description">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                            </div>
-                                        </div> 
-                                    </div>
-                               </li>
-                               <!-- comment -->
-                               <li class="comment">
-                                    <div class="comment_container">
-                                        <img class="avatar" alt="" src="/site_theme/images/author-1.png">
-                                        <div class="comment-info">
-                                            <h4 class="name">MICHAEL VANCE</h4>
-                                            <span class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                            </span>
-                                            <span class="date">03 MINS AGO</span>
-                                            <div class="description">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                            </div>
-                                        </div> 
-                                    </div>
-                               </li>
-                               <!-- #comment-## -->
-                            </ul>
-                            <button id="add-preview" class="button">
-                                <span>Add Review</span>
-                            </button>
-                        </div>
-                
-                        <!--  -->
-                        <div id="review_form_wrapper">
-                            <div id="review_form">
-                               <div class="comment-respond" id="respond">
-                                    <h2 class="comment-reply-title">Here you can review this item</h2>
-                                  <form class="comment-form" id="commentform" method="post" action="#">
-                                        <p class="comment-form-author">
-                                            <input size="30" value="" placeholder="Your Name *" name="author" id="author" type="text">
-                                        </p>
-                                        <p class="comment-form-email">
-                                            <input size="30" value="" placeholder="Your Email *" name="email" id="email" type="text">
-                                        </p>
-                                         <div class="clearfix"></div>
-                                        
-                                        <p class="comment-form-comment">
-                                            <textarea aria-required="true" rows="3" cols="45" placeholder="Message *" name="comment" id="comment"></textarea>
-                                        </p>
-                                        <p class="form-submit">
-                                            <span class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                            </span>
-                                            <input value="ADD REVIEW" class="button dark" id="submit" name="submit" type="submit">
-                                        </p>
-                                  </form>
-                               </div>
-                               <!-- #respond -->
-                            </div>
-                        </div>
-                         
-                      </div>
-                   </div>
-                   <!-- end tab review -->
+                        <%= @product.description.html_safe %>
+                    </div>
 
-                   <!-- tab tags -->
-                   <div id="tab-add_tags" class="tab-content tab-add-tags">
-                      <p>Add your Tags</p>
-                        <div class="row">
-                            <div class="col-sm-6"><input type="text" class="add-tag" placeholder="Add your tag"></div>
-                            <div class="col-sm-6"><button class="button add-tag-btn" value="Add tags">Add tags</button></div>
-                        </div>
+                  <div id="tab-back_call" class="tab-content">
+                        <p>
+                            Закажите обратный звонок по товару уже сейчас
+                        </p>
+                        <%= form_for @back_call, remote: true, authenticity_token: true do |f| %>
                         
-                   </div>
-                   <!-- end tab tags -->
-                </div>
-
-
-                <!-- end tab -->
+                        <%= f.text_field :phone, placeholder: "Номер телефона", class: 'form-control input', width: 20 %>
+                        
+                        <%= f.hidden_field :product_id, value: @product.id %>
+                        
+                        <%= f.submit "Отправить", class: 'btn btn-primary' %>
+                        
+                        <% end %>
+                    </div>
+                     <div id="tab-question" class="tab-content">
+                         <p>
+                            Задайте вопрос по товару
+                        </p>
+                        <%= form_for @product_question, remote: true, authenticity_token: true do |f| %>
+                                <%= f.text_field :name, placeholder: "Имя", class: 'input form-control' %><br/>
+                                <%= f.text_field :phone, placeholder: "Номер телефона", class: 'input form-control' %><br/>
+                                <%= f.text_area :text, placeholder: "Текст вопроса", class: 'input form-control' %><br/>
+                                <%= f.hidden_field :product_id, value: @product.id %>
+                                <%= f.submit "Отправить", class: 'btn btn-primary' %>
+                                <% end %>
+                    </div>
+                    <div  id="tab-form_request" class="tab-content">
+                        <p> Есть предложения к сотрудничеству ? Оставьте заявку и Мы с Вами свяжемся! </p> 
+                                <%= form_for @form_request, remote: true, authenticity_token: true do |f| %>
+                                <%= f.text_field :name, placeholder: "Имя", class: 'input form-control' %><br/>
+                                <%= f.text_field :email, placeholder: "Email", class: 'input form-control' %><br/>
+                                <%= f.text_field :phone, placeholder: "Номер телефона", class: 'input form-control' %><br/>
+                                <%= f.text_area :text, placeholder: "Текст заявки", class: 'input form-control' %><br/>
+                                <%= f.hidden_field :product_id, value: @product.id %>
+                                <%= f.submit "Отправить", class: 'btn btn-primary' %>
+                                <% end %>
                     </div>
                 </div>
 
-                
-
             </div>
         </div>
-        <!-- eng product single -->
-
-        <!-- carousel product -->
-               <section  class="engo-box margin-top-100">
-                  <div class="carousel-product upsell-product">
-                     <div class="container">
-                        <div class="box-title">
-                           <h3 class="h3-title">
-                              Upsell product
-                           </h3>
-                           <div class="title-icon">
-                              <img src="/site_theme/images/title-icon.png" alt="">
-                           </div>
+        
+    </div>
+</div>
+<!-- eng product single -->
+<!-- carousel product -->
+<section  class="engo-box margin-top-100">
+    <div class="carousel-product upsell-product">
+        <div class="container">
+            <div class="box-title">
+                <h3 class="h3-title">
+                 Недавно добавлеенные товары
+                </h3>
+                <div class="title-icon">
+                    <img src="/site_theme/images/title-icon.png" alt="">
+                </div>
+            </div>
+            <!-- tab content -->
+            <div class="box-content">
+                <div class="product-grid owl-carousel-play" data-ride="owlcarousel">
+                    <!-- row item -->
+                    <div class="row clearfix owl-carousel " data-slide="4" data-pagination="false" data-navigation="false" data-desktop="4" data-desktopsmall="4" data-tablet="1" data-tabletsmall="1" data-mobile="1">
+                       <% @random_products.each do |product| %>
+                        <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="100ms">
+                            <div class="product-item ">
+                                           <div class="product-img">
+                                               <a href="#" class="image-hover">
+                                               <%= image_tag product.avatar.page_category, class: 'product-image-photo' %>
+                                               <img src="/site_theme/images/product/2-2.jpg" alt="" class="product-image-photo">
+                                               </a>
+                                           </div>
+                                           <div class="product-info">
+                                               
+                                               <div class="product-name">
+                                                   <%= link_to product.name, product_path(product), class: 'product-item-link' %>
+                                               </div>
+                                               <div class="price-box price-final_price">
+                                                   <span class="price">
+                                                   <%= product.price %> р.
+                                                   </span>  
+                                               </div>
+                                              
+                                           </div>
+                                       </div>
                         </div>
-                        <!-- tab content -->
-                        <div class="box-content">
-                           <div class="product-grid owl-carousel-play" data-ride="owlcarousel">
-                              <!-- row item -->
-                              <div class="row clearfix owl-carousel " data-slide="4" data-pagination="false" data-navigation="false" data-desktop="4" data-desktopsmall="4" data-tablet="1" data-tabletsmall="1" data-mobile="1">
-                                 <!-- product -->
-                                 <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="100ms">
-                                    <div class="product-item">
-                                       <div class="product-img">
-                                          <a href="#" class="image-hover">
-                                          <img src="/site_theme/images/product/tab-product/1.jpg" alt="" class="product-image-photo">
-                                          <img src="/site_theme/images/product/tab-product/1-2.jpg" alt="" class="product-image-photo">
-                                          </a>
-                                       </div>
-                                       <div class="product-info">
-                                          <div class="ratings">
-                                             <div class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                             </div>
-                                          </div>
-                                          <div class="product-name">
-                                             <a href="#" class="product-item-link">
-                                             Legging Cathedral
-                                             </a>
-                                          </div>
-                                          <div class="price-box price-final_price">
-                                             <span class="price">
-                                             $ 35.00
-                                             </span>  
-                                          </div>
-                                          <!-- actions -->
-                                          <div class="actions">
-                                             <div class="action add-to-cart">
-                                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Add to cart">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-wishlist">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-quickview">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview">
-                                                </a>
-                                             </div>
-                                          </div>
-                                          <!-- end actions -->
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- end product -->
-                                 <!-- product -->
-                                 <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="300ms">
-                                    <div class="product-item">
-                                       <div class="product-img">
-                                          <a href="#" class="image-hover" >
-                                          <img src="/site_theme/images/product/tab-product/2.jpg" alt="" class="product-image-photo">
-                                          <img src="/site_theme/images/product/tab-product/2-2.jpg" alt="" class="product-image-photo">
-                                          </a>
-                                       </div>
-                                       <div class="product-info">
-                                          <div class="ratings">
-                                             <div class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                             </div>
-                                          </div>
-                                          <div class="product-name">
-                                             <a href="#" class="product-item-link">
-                                             Legging Cathedral
-                                             </a>
-                                          </div>
-                                          <div class="price-box price-final_price">
-                                             <span class="price">
-                                             $ 35.00
-                                             </span>  
-                                          </div>
-                                          <!-- actions -->
-                                          <div class="actions">
-                                             <div class="action add-to-cart">
-                                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Add to cart">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-wishlist">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-quickview">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview">
-                                                </a>
-                                             </div>
-                                          </div>
-                                          <!-- end actions -->
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- end product -->
-                                 <!-- product -->
-                                 <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="500ms">
-                                    <div class="product-item">
-                                       <div class="product-img">
-                                          <a href="#" class="image-hover" >
-                                          <img src="/site_theme/images/product/tab-product/3.jpg" alt="" class="product-image-photo">
-                                          <img src="/site_theme/images/product/tab-product/3-2.jpg" alt="" class="product-image-photo">
-                                          </a>
-                                       </div>
-                                       <div class="product-info">
-                                          <div class="ratings">
-                                             <div class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                             </div>
-                                          </div>
-                                          <div class="product-name">
-                                             <a href="#" class="product-item-link">
-                                             Legging Cathedral
-                                             </a>
-                                          </div>
-                                          <div class="price-box price-final_price">
-                                             <span class="price">
-                                             $ 35.00
-                                             </span>  
-                                          </div>
-                                          <!-- actions -->
-                                          <div class="actions">
-                                             <div class="action add-to-cart">
-                                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Add to cart">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-wishlist">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-quickview">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview">
-                                                </a>
-                                             </div>
-                                          </div>
-                                          <!-- end actions -->
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- end product -->
-                                 <!-- product -->
-                                 <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="700ms">
-                                    <div class="product-item">
-                                       <div class="product-img">
-                                          <a href="#" class="image-hover" >
-                                          <img src="/site_theme/images/product/tab-product/4.jpg" alt="" class="product-image-photo">
-                                          <img src="/site_theme/images/product/tab-product/5-2.jpg" alt="" class="product-image-photo">
-                                          </a>
-                                       </div>
-                                       <div class="product-info">
-                                          <div class="ratings">
-                                             <div class="ratings">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star empty"></i>
-                                                <i class="fa fa-star empty"></i>
-                                             </div>
-                                          </div>
-                                          <div class="product-name">
-                                             <a href="#" class="product-item-link">
-                                             Legging Cathedral
-                                             </a>
-                                          </div>
-                                          <div class="price-box price-final_price">
-                                             <span class="price">
-                                             $ 35.00
-                                             </span>  
-                                          </div>
-                                          <!-- actions -->
-                                          <div class="actions">
-                                             <div class="action add-to-cart">
-                                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Add to cart">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-wishlist">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
-                                                </a>
-                                             </div>
-                                             <div class="action add-to-quickview">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to quickview">
-                                                </a>
-                                             </div>
-                                          </div>
-                                          <!-- end actions -->
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- end product -->
-                              </div>
-                              <!-- end row item -->
-                           </div>
-                        </div>
-                        <!-- end tab container -->
-                     </div>
-                  </div>
-               </section>
-               <!-- End carousel product -->
-    </main>
+                        <!-- end product -->
+                        <% end %>
+                    </div>
+                    <!-- end row item -->
+                </div>
+            </div>
+            <!-- end tab container -->
+        </div>
+    </div>
+</section>
+<!-- End carousel product -->
+</main>

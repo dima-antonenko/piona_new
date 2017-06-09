@@ -45,6 +45,10 @@ content_description_page = "<p>После оформления заказа ре
 ####################
 # Категории товаров
 ####################
+=begin
+  
+
+  
 
 ProductCategory.destroy_all
 
@@ -79,7 +83,7 @@ ProductCategory.all.each do |product_category|
     category.save
   end
 end
-
+=end
 ####################
 ####################
 
@@ -90,16 +94,20 @@ end
 ####################
 # Товары
 ####################
-
+=begin
 Product.destroy_all
 ProductCategory.all.each do |product_category|
-  rand(4..5).times do |t|
+  rand(4..10).times do |t|
     product = Product.new(product_category_id: product_category.id, description: product_description, price: t * 100,
                           slug: "product#{t}", short_description: product_short_description, qty: 20)
     product.name = "Товар #{t}"
 
     File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
       product.avatar = f
+    end
+    
+    File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
+      product.second_avatar = f
     end
     product.save
   end
@@ -114,7 +122,7 @@ Product.all.each do |product|
     attacment.save
   end
 end
-
+=end
 ####################
 ####################
 
@@ -313,6 +321,7 @@ end
 ####################
 # Админ
 ####################
+=begin
 user = Administrator.new(
     :email                 => "user@test.ru",
     :password              => "12345",
@@ -321,5 +330,23 @@ user = Administrator.new(
 user.save!
 user.encrypted_password="$2a$10$LhFI1e6PxdnfPCUHwPFSJenkIIkntkd9v4SQd.BvCuC8VtuHdAqUi"
 user.save
+=end
 ####################
 ####################
+
+
+product_category = ProductCategory.friendly.find('slug-category-0')
+10.times do |t|
+    product = Product.new(product_category_id: product_category.id, description: product_description, price: t * 100,
+                          slug: "product#{t}", short_description: product_short_description, qty: 20)
+    product.name = "Товар #{t}"
+
+    File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
+      product.avatar = f
+    end
+    
+    File.open("public/demo/products/#{rand(1..15)}.jpg") do |f|
+      product.second_avatar = f
+    end
+    product.save
+end    

@@ -7,7 +7,7 @@ class Site::ProductsController < SiteController
 
     @product_category = @product.product_category
     @attacments = ProductAttachment.where(product_id: @product.id)
-    @random_products = Product.limit(5)
+    @random_products =  Product.order("RANDOM()").limit(7)
 
     @product_question = ProductQuestion.new
     @back_call = BackCall.new

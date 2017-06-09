@@ -3,7 +3,10 @@ class Product < ActiveRecord::Base
   extend FriendlyId
  
   friendly_id :slug, use: :slugged
+  
   mount_uploader :avatar, ProductAvatarUploader
+  mount_uploader :second_avatar, ProductAvatarUploader
+
   attr_accessor :checked_products, :checked_action
   
 

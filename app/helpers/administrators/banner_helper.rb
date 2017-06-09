@@ -1,2 +1,0 @@
-module Administrators::BannerHelper
-end

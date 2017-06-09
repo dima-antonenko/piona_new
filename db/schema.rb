@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428072625) do
+ActiveRecord::Schema.define(version: 20170608111327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,7 @@ ActiveRecord::Schema.define(version: 20170428072625) do
     t.integer  "qty",                 default: 1,    null: false
     t.boolean  "stock",               default: true, null: false
     t.text     "short_description",   default: "",   null: false
+    t.string   "second_avatar"
     t.index ["avatar"], name: "index_products_on_avatar", using: :btree
     t.index ["description"], name: "index_products_on_description", using: :btree
     t.index ["name"], name: "index_products_on_name", using: :btree
