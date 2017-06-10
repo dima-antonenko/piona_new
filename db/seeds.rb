@@ -441,12 +441,16 @@ demo_product_path          = '/products/' + Product.last.slug
 demo_product_category_path = 'product_categories/' + ProductCategory.last.slug
 
 
-MenuItem.create(title: 'Главная',       url: '/', position: 1, menu_id: main_menu_id)
-MenuItem.create(title: 'Каталог',       url: "/product_categories/#{first_product_categoty_slug}", position: 2, menu_id: main_menu_id)
-parent_item = MenuItem.create(title: 'Демо-страницы', url: '/', position: 3, menu_id: main_menu_id)
+
+MenuItem.create(title: 'Новинки',       url: "/product_categories/#{first_product_categoty_slug}", position: 1, menu_id: main_menu_id)
+MenuItem.create(title: 'Распродажа',       url: "/product_categories/#{first_product_categoty_slug}", position: 2, menu_id: main_menu_id)
+MenuItem.create(title: 'Наборы',       url: "/product_categories/#{first_product_categoty_slug}", position: 3, menu_id: main_menu_id)
+MenuItem.create(title: 'Женская парфюмерия', url: "/product_categories/#{first_product_categoty_slug}", position: 4, menu_id: main_menu_id)
+MenuItem.create(title: 'Мужская парфюмерия', url: "/product_categories/#{first_product_categoty_slug}", position: 5, menu_id: main_menu_id)
+parent_item = MenuItem.create(title: 'Демо', url: '/', position: 6, menu_id: main_menu_id)
 
 
-MenuItem.create(title: 'Категория товара',    url: demo_product_category_path, position: 1, menu_id: main_menu_id, parent:  parent_item)
+MenuItem.create(title: 'Категория товара',    url: "/product_categories/#{first_product_categoty_slug}", position: 1, menu_id: main_menu_id, parent:  parent_item)
 MenuItem.create(title: 'Товар',               url: demo_product_path,          position: 2, menu_id: main_menu_id, parent:  parent_item)
 MenuItem.create(title: 'Статческая страница', url: '/contacts',                position: 5, menu_id: main_menu_id, parent:  parent_item)
 
