@@ -34,7 +34,6 @@ Rails.application.routes.draw do
 
 
   get "/contacts"          => "site/static_pages#contacts", via: [:get]
-  get "/company_info"      => "site/static_pages#company_info", via: [:get]
   get "/delivery_info"     => "site/static_pages#delivery_info", via: [:get]
   get "/payment_info"      => "site/static_pages#payment_info", via: [:get]
   get "/terms_of_service"  => "site/static_pages#terms_of_service", via: [:get]

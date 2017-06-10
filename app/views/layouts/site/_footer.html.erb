@@ -1,16 +1,40 @@
-   <footer class="site-footer footer-v3">
-                     <!-- footer content -->
-                     <div class="footer">
-                       
-                        <div class="main-footer">
-                           <div class="footer-widget">
-                              <div class="container">
-                                 <center><p>2017 piona.by все права защищены</p></center>
+ <footer class="site-footer footer-v3">
+      <!-- footer content -->
+      <div class="footer">
+
+         <!--Main-footer-->
+         <div class="main-footer">
+            <div class="footer-widget">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-6 col-sm-6">
+                        <div class="contact">
+                           <div class="logo">
+                              <img src="/site_theme/images/logo-ft.png" alt="">
+                           </div>
+                           <div class="f-content-widget">
+                              <div class="text-widget">
+                                <%= @phone_and_email.content.html_safe %>
                               </div>
+                             
                            </div>
                         </div>
-                        <!-- END Main-footer-->
-                        
                      </div>
-                     <!-- end footer content -->
-                  </footer>
+                     <div class="col-md-3 col-sm-3">
+                        <div class="policy">
+                          <%= @delivery_data.content.html_safe %>
+                        </div>
+                     </div>
+                     <div class="col-md-3 col-sm-3">
+                        <div class="services">
+                          <%= @law_data.content.html_safe %>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+       
+      </div>
+   <!-- end footer content -->
+   </footer>

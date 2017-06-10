@@ -247,33 +247,12 @@ banner.save
 
 
 
-####################
-# Блоки информации
-####################
-
-SiteVariable.destroy_all
-SiteVariable.create(title: "Телефон в шапке", descriptor: "phone_in_head", content: "8-800-555-35-35")
-
-####################
-####################
 
 
 
 
-####################
-# Блоки информации
-####################
 
-Page.destroy_all
 
-Page.create(name: "Главная", descriptor: "home", description: content_description_page)
-Page.create(name: "Контакты", descriptor: "contacts", description: content_description_page)
-Page.create(name: "Информаци о доставке", descriptor: "delivery_info", description: content_description_page)
-Page.create(name: "Информаци о оплате", descriptor: "payment_info", description: content_description_page)
-Page.create(name: "Условия обслуживания", descriptor: "terms_of_service", description: content_description_page)
-
-####################
-####################
 
 
 
@@ -390,6 +369,7 @@ end
 =end
 ####################
 ####################
+=begin
 Page.destroy_all
 
 Page.create(name: "Главная", descriptor: "home", description: content_description_page)
@@ -397,3 +377,51 @@ Page.create(name: "Контакты", descriptor: "contacts", description: conte
 Page.create(name: "Информаци о доставке", descriptor: "delivery_info", description: content_description_page)
 Page.create(name: "Информаци о оплате", descriptor: "payment_info", description: content_description_page)
 Page.create(name: "Условия обслуживания", descriptor: "terms_of_service", description: content_description_page)
+=end
+
+
+####################
+# Блоки информации
+####################
+
+SiteVariable.destroy_all
+SiteVariable.create(title: "Телефон и email в футоре", descriptor: "phone_in_footer", content: "<p class=\"address\">
+                                    <Strong>Адрес:</Strong> г. Минск, ул. Солнечная, д. 12
+                                 </p>
+                                 <p class=\"hotline\">
+                                    <strong>Телефон:</strong> 070-7782-9137 <br/>
+                                    <strong>Email: </strong> contact@piona.by
+                                 </p>")
+SiteVariable.create(title: "Доставка и оплата в футоре", descriptor: "delivery_in_footer", content: "<h3 class=\"title-widget\">
+                              <a href=\"#\">Доставка и оплата</a>
+                           </h3>
+                           <ul>
+                              <li><a href=\"/delivery_info\">Доставка</a></li>
+                              <li><a href=\"/payment_info\">Оплата</a></li>
+                           </ul>
+                        ")
+SiteVariable.create(title: "Юр информация в футоре", descriptor: "law_info_in_footer", content: "<h3 class=\"title-widget\">
+                              <a href=\"#\">Юридическая информация</a>
+                           </h3>
+                           <ul>
+                              <li><a href=\"/terms_of_service\">Условия обслуживания</a></li>
+                              <li><a href=\"/contacts\">Контакты</a></li>
+                           </ul>")
+
+####################
+####################
+
+####################
+# Страницы
+####################
+
+Page.destroy_all
+
+Page.create(name: "Главная", descriptor: "home", description: content_description_page)
+Page.create(name: "Контакты", descriptor: "contacts", description: content_description_page)
+Page.create(name: "Информаци о доставке", descriptor: "delivery_info", description: content_description_page)
+Page.create(name: "Информаци о оплате", descriptor: "payment_info", description: content_description_page)
+Page.create(name: "Условия обслуживания", descriptor: "terms_of_service", description: content_description_page)
+
+####################
+####################
