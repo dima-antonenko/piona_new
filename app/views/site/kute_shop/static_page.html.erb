@@ -1,23 +1,58 @@
-<% provide(:class, 'category-page') %>
-
 <% provide(:seo_title, @page.meta_title) %>
 <% provide(:seo_description, @page.meta_description) %>
 <% provide(:seo_keywords, @page.meta_keywords) %>
-
-<div class="columns-container">
-    <div class="container" id="columns">
-
+<main class="wrapper main-content ">
+<!-- contact-text -->
+<section id="contact" class="contact">
+    <div class="container">
         <div class="row">
-
-            <div class="center_column col-xs-12 col-sm-12" id="center_column">
-                <h2 class="page-heading">
-                    <span class="page-heading-title2"><%= @page.name %></span>
-                </h2>
-                <div class="content-text clearfix">
-                    <%= @page.description.html_safe %>
+            <article class="post">
+                
+                <div class="post-info">
+                    <h3 class="post-title"><%= @page.name %></h3>
+                    
+                    <div class="post-desc">
+                        <%= @page.description.html_safe %>
+                    </div>
+                    <!-- .post-desc -->
                 </div>
-   
-            </div>
+                
+            </article>
         </div>
     </div>
-</div>
+</section>
+
+<section class="contact-form">
+    <div class="container">
+        <div class="row">
+            <h2 class="title title-contact"><span>Есть вопрос или предложение ? Отправьте его и Мы с Вами свяжемся!</span></h2>
+            <%= form_for @form_request, remote: true, authenticity_token: true, class: 'contact-form' do |f| %>
+            <div class="col-md-4">
+                <div class="input-field">
+                    <%= f.text_field :name, placeholder: "Имя", class: 'input-text' %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-field">
+                    <%= f.text_field :email, placeholder: "Email", class: 'input-text' %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-field">
+                    <%= f.text_field :phone, placeholder: "Номер телефона", class: 'input-text' %>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <%= f.text_area :text, placeholder: "Текст заявки", rows: 10 %>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="button"> <%= f.submit "Отправить", class: 'button btn btn-primary' %></div>
+            </div>
+            
+            <% end %>
+        </div>
+    </div>
+    
+</section>
+<!-- end contact -->
+</main>

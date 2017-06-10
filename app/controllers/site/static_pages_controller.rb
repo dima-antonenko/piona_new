@@ -11,21 +11,25 @@ class Site::StaticPagesController < SiteController
 
   def contacts
     @page = Page.find_by(descriptor: 'contacts')
+    @form_request = FormRequest.new
     render theme_path('static_page')
   end
 
   def delivery_info
     @page = Page.find_by(descriptor: 'delivery_info')
+    @form_request = FormRequest.new
     render theme_path('static_page')
   end
 
   def payment_info
     @page = Page.find_by(descriptor: 'payment_info')
+    @form_request = FormRequest.new
     render theme_path('static_page')
   end
 
   def terms_of_service
     @page = Page.find_by(descriptor: 'terms_of_service')
+    @form_request = FormRequest.new
     render theme_path('static_page')
   end
 
