@@ -414,7 +414,7 @@ SiteVariable.create(title: "Юр информация в футоре", descript
 ####################
 # Страницы
 ####################
-
+=begin
 Page.destroy_all
 
 Page.create(name: "Главная", descriptor: "home", description: content_description_page)
@@ -422,6 +422,35 @@ Page.create(name: "Контакты", descriptor: "contacts", description: conte
 Page.create(name: "Информаци о доставке", descriptor: "delivery_info", description: content_description_page)
 Page.create(name: "Информаци о оплате", descriptor: "payment_info", description: content_description_page)
 Page.create(name: "Условия обслуживания", descriptor: "terms_of_service", description: content_description_page)
+=end
+####################
+####################
+
+####################
+# Меню
+####################
+
+MenuItem.destroy_all
+Menu.destroy_all
+
+first_product_categoty_slug = ProductCategory.first.slug
+
+main_menu_id = Menu.create(name: "Главное меню", descriptor: "main_menu").id
+
+demo_product_path          = '/products/' + Product.last.slug
+demo_product_category_path = 'product_categories/' + ProductCategory.last.slug
+
+
+MenuItem.create(title: 'Главная',       url: '/', position: 1, menu_id: main_menu_id)
+MenuItem.create(title: 'Каталог',       url: "/product_categories/#{first_product_categoty_slug}", position: 2, menu_id: main_menu_id)
+parent_item = MenuItem.create(title: 'Демо-страницы', url: '/', position: 3, menu_id: main_menu_id)
+
+
+MenuItem.create(title: 'Категория товара',    url: demo_product_category_path, position: 1, menu_id: main_menu_id, parent:  parent_item)
+MenuItem.create(title: 'Товар',               url: demo_product_path,          position: 2, menu_id: main_menu_id, parent:  parent_item)
+MenuItem.create(title: 'Статческая страница', url: '/contacts',                position: 5, menu_id: main_menu_id, parent:  parent_item)
+
+
 
 ####################
 ####################

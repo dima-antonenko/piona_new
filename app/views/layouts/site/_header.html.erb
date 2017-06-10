@@ -22,19 +22,24 @@
                   <!-- nav -->
                   <div id="main-menu" class="main-menu clearfix">
                            <ul class="main-nav clearfix">
-                              <li><a href="#" title="">Главная</a>
-                              </li>
+                            
+                            
+                              <% @main_menu.each do |item| %>
+                              <% if item.children.size == 0 %>
+                                <li><%= link_to item.title, item.url %></li>
+                              <% else %>
+                               <li>
+                                 <%= link_to item.title, item.url %>
+                                  <ul class="sub-menu">
+                                  <% item.children.each do |children_item| %>
+                                    <li><%= link_to children_item.title, children_item.url %></li>
+                                    <% end %>
+                                  </ul>
+                                </li>
+                              <% end %>
                               
-                              <li>
-                                 <a href="#" title="">Каталог</a>
-                                 <ul class="sub-menu">
-                                <li><a href="blog-v4.html">Женские товары</a></li>
-                                     <li><a href="blog-v4.html">Женские товары</a></li>
-                                 </ul>
-                              </li>
-                              <li><a href="#" title="">Доставка</a>
-                              <li><a href="#" title="">Оплата</a>
-                              <li><a href="#" title="">Контакты</a>
+                              
+                           <% end %>
 
                            </ul>
                         </div>

@@ -8,8 +8,8 @@ class SiteController < ApplicationController
     @phone_and_email = SiteVariable.find_by(descriptor: 'phone_in_footer')
     @delivery_data   = SiteVariable.find_by(descriptor: 'delivery_in_footer')
     @law_data        = SiteVariable.find_by(descriptor: 'law_info_in_footer')
-
-    @minicart          = Cart.find(session[:cart_id]) if session[:cart_id]
+    @main_menu       = Menu.find_by(descriptor: 'main_menu').menu_items.where(ancestry: nil).order(:position)
+    @minicart        = Cart.find(session[:cart_id]) if session[:cart_id]
   end
 
 
