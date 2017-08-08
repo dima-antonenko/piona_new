@@ -1,16 +1,33 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: 5
+  timeout: 5000
 
 
 development:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: piona	
+  database: panda 
   username: postgres
   password: 12345
   host: localhost
 
 
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: panda_test
+  username: postgres
+  password: 12345
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ddima1212_piona38
+  username: dima1212_piona38
+  password: piona
+  host: postgresql7.locum.ru
