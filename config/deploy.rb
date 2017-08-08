@@ -1,7 +1,8 @@
 # encoding: utf-8
 # config valid only for Capistrano 3
-lock '3.8.2'
-
+lock '3.9.0'
+# require "capistrano/scm/git"
+# install_plugin Capistrano::SCM::Git
 # Project configuration options
 # ------------------------------
 
@@ -16,7 +17,7 @@ set :unicorn_pid,    "/var/run/unicorn/#{fetch(:user)}/" \
 set :bundle_without, %w{development test}.join(' ')             # this is default
 set :use_sudo,       false
 
-set :repo_url,       "https://github.com/dima-antonenko/piona_new" 
+set :repo_url,       "https://github.com/dima-antonenko/piona_new.git" 
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
