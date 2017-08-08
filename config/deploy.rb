@@ -10,6 +10,7 @@ set :application,    'piona_new'
 set :login,          'dima1212'
 set :user,           'hosting_dima1212'
 
+
 set :deploy_to,      "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
 set :unicorn_conf,   "/etc/unicorn/#{fetch(:application)}.#{fetch(:login)}.rb"
 set :unicorn_pid,    "/var/run/unicorn/#{fetch(:user)}/" \
@@ -19,10 +20,16 @@ set :use_sudo,       false
 
 set :repo_url,       "https://github.com/dima-antonenko/piona_new.git" 
 
+set :keep_releases, 1
+set :ssh_options, {
+forward_agent: true,
+port: 220
+}
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-set :scm, :git
+# set :scm, :git
 set :format, :pretty
 set :pty, true
 
@@ -39,7 +46,7 @@ set :linked_dirs, %w(log tmp/cache tmp/pids vendor/bundle public/system)
 # set :keep_releases, 5
 
 # Configure RVM
-set :rvm_ruby_version, '2.2'
+set :rvm_ruby_version, '2.4'
 
 # You unlikely have to change below this line
 # -----------------------------------------------------------------------------

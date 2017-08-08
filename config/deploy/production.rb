@@ -7,5 +7,6 @@ set :ssh_options, {
   user: fetch(:user),
   forward_agent: true,
   auth_methods: %w(password),
-  password: 'xaPFjibKdW'
+  password: 'I1TnrbOUwwS',
+  port: 220
 }
