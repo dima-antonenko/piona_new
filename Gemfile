@@ -43,8 +43,14 @@ end
 
 group :production do
   gem 'unicorn'
+  gem 'pg', '~> 0.18.4'
 end
 
 group :test do
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+end
+
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
 end
