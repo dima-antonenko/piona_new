@@ -1,12 +1,10 @@
-
-role :app, %w{sulfur.locum.ru}
-role :web, %w{sulfur.locum.ru}
-role :db,  %w{sulfur.locum.ru}
+role :app, %w{cobalt.locum.ru}
+role :web, %w{cobalt.locum.ru}
+role :db,  %w{cobalt.locum.ru}
  
 set :ssh_options, {
   user: fetch(:user),
   forward_agent: true,
   auth_methods: %w(password),
-  password: 'I1TnrbOUwwS',
-  port: 220
+  password: 'I1TnrbOUwwS'
 }

@@ -22,7 +22,7 @@ set :repo_url,       "https://github.com/dima-antonenko/piona_new.git"
 
 set :keep_releases, 1
 set :ssh_options, {
-forward_agent: true,
+ forward_agent: true,
 port: 220
 }
 
