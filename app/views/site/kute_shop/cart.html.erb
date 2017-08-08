@@ -72,7 +72,7 @@
                     <%= form_for @order, remote: true, authenticity_token: true do |f| %>
                       
                        <div class="input-text cart-input">
-                          <%= f.text_field :customer_name, placeholder: "Имя", class: "input form-control" %>
+                          <%= f.text_field :customer_name, placeholder: "Имя(обязательно)", class: "input form-control" %>
                        </div>
                        <div class="input-text cart-input">
                          <%= f.text_field :customer_email, placeholder: "Email", class: "input form-control" %>
@@ -84,7 +84,7 @@
                           <%= f.text_area :customer_city, placeholder: "Город", class: "input form-control" %>
                        </div>
                        <div class="input-text cart-input">
-                          <%= f.text_area :customer_address, placeholder: "Адрес", class: "input form-control" %>
+                          <%= f.text_area :customer_address, placeholder: "Адрес (обязательно)", class: "input form-control" %>
                        </div>
                        <div class="input-submit">
                           <%= f.submit "Оформить заказ", class: "btn-add-cart" %>

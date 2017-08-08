@@ -75,6 +75,20 @@
                 </div>
             </div>
 
+             <div class="md-card">
+                <div class="md-card-toolbar">
+                    <h3 class="md-card-toolbar-heading-text">
+                    Прочее
+                    </h3>
+                </div>
+               <div class="md-card-content">
+                    <div class="uk-float-right">
+                        <%= f.check_box :on_main_page, {  class: "ts_checkbox", id: "product_edit_active_control", "data-switchery": true}  %>
+                    </div>
+                    <label class="uk-display-block uk-margin-small-top" for="product_edit_active_control">На главной</label>
+                </div>
+            </div>
+
             <div class="md-card">
                 <div class="md-card-toolbar">
                     <h3 class="md-card-toolbar-heading-text">

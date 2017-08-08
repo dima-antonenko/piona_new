@@ -60,7 +60,7 @@ class Administrators::ProductCategoriesController < AdministratorsController
 
   def product_category_params
     params.require(:product_category).permit(:name, :product_category_id, :slug, :description, :meta_title,
-                                          :meta_description, :meta_keywords, :avatar, :large_avatar)
+                                          :meta_description, :meta_keywords, :avatar, :on_main_page)
   end
 
 

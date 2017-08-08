@@ -47,16 +47,19 @@
                   <!-- right header -->
                   <div class="right-header">
                      <!-- cart -->
+                     <% if @minicart %>
                      <div class="mini-cart clearfix off-canvas-right">
+
                         <div class="cart-icon off-canvas">
-                           <img src="/site_theme/images/cart-icon2.png" alt="">
+                          <a href="<%= cart_path(@minicart) %>"> <img src="/site_theme/images/cart-icon2.png" alt=""> </a>
                         </div>
                         <div class="cart-label off-canvas">
-                           Корзина
-                           <i>(3)</i>
+                        <a href="<%= cart_path(@minicart) %>">   Корзина
+                           <i>(<%= @minicart.total_price %> р)</i></a>
                         </div>
-                       
+                      
                      </div>
+                     <% end %>
                      <!-- end cart -->
                     
                   </div>

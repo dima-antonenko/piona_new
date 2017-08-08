@@ -28,6 +28,7 @@ module SAdministrator
         @product.description         = @params[:description]
         @product.short_description   = @params[:short_description]
         @product.avatar              = @params[:avatar]
+        @product.second_avatar       = @params[:product][:second_avatar] if @params[:product][:second_avatar]
         @product.slug                = @params[:slug]
         @product.stock               = @params[:stock]
         @product.qty                 = @params[:qty]

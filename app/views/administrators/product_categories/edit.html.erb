@@ -74,21 +74,20 @@
                     </div>
                 </div>
             </div>
-            <div class="md-card">
+             <div class="md-card">
                 <div class="md-card-toolbar">
                     <h3 class="md-card-toolbar-heading-text">
-                    Изображение на странице категории
+                    Прочее
                     </h3>
                 </div>
-                <div class="md-card-content">
-                    <div class="uk-form-row">
-                        <%= f.file_field :large_avatar, class: "product_file_upload" %>
+               <div class="md-card-content">
+                    <div class="uk-float-right">
+                        <%= f.check_box :on_main_page, {  class: "ts_checkbox", id: "product_edit_active_control", "data-switchery": true}  %>
                     </div>
-                    <div class="uk-form-row">
-                        <img src="<%= @product_category.large_avatar.edit_thumb %>" alt="" class="img_big"/>
-                    </div>
+                    <label class="uk-display-block uk-margin-small-top" for="product_edit_active_control">На главной</label>
                 </div>
             </div>
+            
         </div>
 
         <div class="md-fab-wrapper">
