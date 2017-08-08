@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake', '>= 12.0.0'
-gem 'rails', github: 'rails/rails', branch: "5-0-stable"
+gem 'rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '~> 2.7', '>= 2.7.2'
 gem 'coffee-rails', '~> 4.1'
