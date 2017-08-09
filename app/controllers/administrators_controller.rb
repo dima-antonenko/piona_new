@@ -1,5 +1,6 @@
 class AdministratorsController < ApplicationController
-  before_filter :authenticate_administrator!
+  
+  #before_filter :authenticate_administrator!
   protect_from_forgery with: :exception
 
   layout "administrator"
