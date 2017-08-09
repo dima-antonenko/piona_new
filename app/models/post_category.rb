@@ -4,7 +4,7 @@ class PostCategory < ActiveRecord::Base
   friendly_id :slug, use: :slugged
 
 
-  mount_uploader :avatar, PostCategoryAvatarUploader
+ # mount_uploader :avatar, PostCategoryAvatarUploader
 
 
   has_many :post_categories, dependent: :destroy
