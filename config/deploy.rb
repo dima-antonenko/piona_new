@@ -43,7 +43,7 @@ set :log_level, :info
 set :linked_dirs, %w(log tmp/cache tmp/pids vendor/bundle public/system)
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+
 
 # Configure RVM
 set :rvm_ruby_version, '2.4'
