@@ -6,7 +6,7 @@ lock '3.9.0'
 # Project configuration options
 # ------------------------------
 
-set :application,    'piona_new'
+set :application,    'piona'
 set :login,          'dima1212'
 set :user,           'hosting_dima1212'
 
