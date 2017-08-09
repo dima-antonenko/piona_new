@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 
 
   friendly_id :slug, use: :slugged
-  mount_uploader :avatar, PostAvatarUploader
+ # mount_uploader :avatar, PostAvatarUploader
 
 
   belongs_to :post_category
