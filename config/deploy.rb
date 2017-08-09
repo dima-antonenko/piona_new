@@ -14,16 +14,16 @@ set :user,           'hosting_dima1212'
 set :deploy_to,      "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
 set :unicorn_conf,   "/etc/unicorn/#{fetch(:application)}.#{fetch(:login)}.rb"
 set :unicorn_pid,    "/var/run/unicorn/#{fetch(:user)}/" \
-                     "#{fetch(:application)}.#{fetch(:login)}.pid"
-set :bundle_without, %w{development test}.join(' ')             # this is default
+  "#{fetch(:application)}.#{fetch(:login)}.pid"
+  set :bundle_without, %w{development test}.join(' ')             # this is default
 set :use_sudo,       false
 
-set :repo_url,       "https://github.com/dima-antonenko/piona_new.git" 
+set :repo_url,       "https://github.com/dima-antonenko/piona_new.git"
 
 set :keep_releases, 1
 set :ssh_options, {
- forward_agent: true,
-port: 220
+  forward_agent: true,
+  port: 220
 }
 
 # Default branch is :master
@@ -58,16 +58,22 @@ set :bundle_cmd,      "rvm use #{fetch(:rvm_ruby_version)} do bundle"
 set :assets_roles, [:web, :app]
 
 set :unicorn_start_cmd,
-    "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
-    "do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
+  "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
+  "do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
 
 # - for unicorn - #
 namespace :deploy do
 
 
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  desc 'Runs rake db:seed'
+  task :seed => [:set_rails_env] do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "db:seed"
+        end
+      end
+    end
   end
 
   desc 'Start application'
@@ -81,7 +87,7 @@ namespace :deploy do
   task :stop do
     on roles(:app) do
       execute "[ -f #{fetch(:unicorn_pid)} ] && " \
-              "kill -QUIT `cat #{fetch(:unicorn_pid)}`"
+        "kill -QUIT `cat #{fetch(:unicorn_pid)}`"
     end
   end
 
@@ -91,8 +97,8 @@ namespace :deploy do
   task :restart do
     on roles(:app) do
       execute "[ -f #{fetch(:unicorn_pid)} ] && " \
-              "kill -USR2 `cat #{fetch(:unicorn_pid)}` || " \
-              "#{fetch(:unicorn_start_cmd)}"
+        "kill -USR2 `cat #{fetch(:unicorn_pid)}` || " \
+        "#{fetch(:unicorn_start_cmd)}"
     end
   end
 end
