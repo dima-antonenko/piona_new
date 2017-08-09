@@ -27,7 +27,7 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: ddima1212_piona38
-  username: dima1212_piona38
-  password: piona
+  database: dima1212_piona55
+  username: dima1212_piona55
+  password: tSmoE4Tpi
   host: postgresql7.locum.ru
