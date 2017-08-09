@@ -63,6 +63,13 @@ set :unicorn_start_cmd,
 
 # - for unicorn - #
 namespace :deploy do
+
+
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
   desc 'Start application'
   task :start do
     on roles(:app) do
